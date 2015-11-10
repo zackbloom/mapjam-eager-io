@@ -38,13 +38,10 @@
         "type": "string",
         "default": "world"
       },
-      "width": {
-        "title": "Width",
-        "type": "integer"
-      },
-      "height": {
-        "title": "Height",
-        "type": "integer"
+      "zoom": {
+        "title": "Zoom",
+        "type": "integer",
+        "default": 15
       }
     }
   }

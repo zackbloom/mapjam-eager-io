@@ -40,7 +40,7 @@
   var update = function(){
     console.log(options);
     updateElement();
-    el.innerHTML = '<iframe class="mapjam-iframe" frameborder="0" id="mapjam-iframe" src="//embeds.mapjam.com/v2/map-embed.html?app_url=https://mapjam.com/&cdn_url=https://mapjam.com/&map_id=' + options.map + '&map_width=' + options.width + 'px&map_height=' + options.height + 'px&container=mapjam-1&domain=mapjam.com&disableClusteringAtZoom=1" style="width: 100%;height:{{height_px}}px"></iframe>';
+    el.innerHTML = '<iframe class="mapjam-iframe" frameborder="0" id="mapjam-iframe" src="//embeds.mapjam.com/v2/map-embed.html?app_url=https://mapjam.com/&cdn_url=https://mapjam.com/&map_id=' + options.map + '&zoom=' + options.zoom + '&container=mapjam-1&domain=mapjam.com&disableClusteringAtZoom=1" style="width: 100%;height:{{height_px}}px"></iframe>';
   }
 
   var setOptions = function(opts){
