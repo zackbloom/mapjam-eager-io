@@ -4,10 +4,6 @@
     "head": [
       {
         "type": "script",
-        "src": "./mapjam-iframe.js"
-      },
-      {
-        "type": "script",
         "src": "./app.js"
       }
     ]
