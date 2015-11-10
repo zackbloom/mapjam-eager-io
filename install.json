@@ -1,0 +1,51 @@
+
+{
+  "resources": {
+    "head": [
+      {
+        "type": "script",
+        "src": "./mapjam-iframe.js"
+      },
+      {
+        "type": "script",
+        "src": "./app.js"
+      }
+    ]
+  },
+  "preview": {
+    "handlers": [
+      {
+        "options": ["*"],
+        "execute": "MapjamWidget.setOptions(INSTALL_OPTIONS)"
+      }
+    ]
+  },
+  "options": {
+    "properties": {
+      "element": {
+        "title": "Location",
+        "description": "Where would you like the map to appear?",
+        "order": 1,
+        "type": "object",
+        "format": "element",
+        "default": {
+          "selector": "body",
+          "method": "append"
+        }
+      },
+      "map": {
+        "title": "Map",
+        "type": "string",
+        "default": "world"
+      },
+      "width": {
+        "title": "Width",
+        "type": "integer"
+      },
+      "height": {
+        "title": "Height",
+        "type": "integer"
+      }
+    }
+  }
+}
