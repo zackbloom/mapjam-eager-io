@@ -4,7 +4,7 @@
 
   // We check for features which are not universally supported, and don't try to
   // show the app if it would error.
-  if (!window.addEventListener || !window.localStorage)
+  if (!window.addEventListener)
     return;
 
   // The INSTALL_OPTIONS constant is inserted by the Eager bundler.  It's value is the
@@ -40,14 +40,43 @@
   var update = function(){
     console.log(options);
     updateElement();
-    el.innerHTML = '<iframe class="mapjam-iframe" frameborder="0" id="mapjam-iframe" src="//embeds.mapjam.com/v2/map-embed.html?app_url=https://mapjam.com/&cdn_url=https://mapjam.com/&map_id=' + options.map + '&zoom=' + options.zoom + '&container=mapjam-1&domain=mapjam.com&disableClusteringAtZoom=1" style="width: 100%;height:{{height_px}}px"></iframe>';
-  }
+    // build the querystring for embeds based on user input
+    var params = {
+        app_url: '//mapjam.com/',
+        cdn_url: '//mapjamjson.global.ssl.fastly.net/',
+        map_id: options.map,
+        container: 'mapjam-1',
+        domain: 'mapjam.com',
+        disableClusteringAtZoom: 1
+    };
+    if (options.zoom) {
+      params.zoom = Math.max(Math.min(options.zoom, 18), 1);
+    }
+    if (options.sharing_visible) {
+      params.sharing_visible = !options.sharing_visible;
+    }
+    function validLat(lat) {
+      return lat !== null && lat !== undefined && !isNaN(lat);
+    }
+    if (validLat(options.lat) && validLat(options.lng)) {
+      params.map_lat_lng = options.lng + ',' + options.lat;
+    }
+    var parts = [];
+    for (var i in params) {
+      if (params.hasOwnProperty(i)) {
+        parts.push(encodeURIComponent(i) + "=" + encodeURIComponent(params[i]));
+      }
+    }
+    var qs = parts.join("&");
+    console.log('qs: ' + qs);
+    el.innerHTML = '<iframe class="mapjam-iframe" frameborder="0" id="mapjam-iframe" src="//embeds.mapjam.com/v2/map-embed.html?' + qs + '" style="width: 100%;height:{{height_px}}px"></iframe>';
+  };
 
   var setOptions = function(opts){
     options = opts;
 
     update();
-  }
+  };
 
   // Since we're adding an element to the body, we need to wait until the DOM is
   // ready before inserting our widget.
@@ -62,4 +91,4 @@
     setOptions: setOptions
   };
 
-})()
+})();

@@ -39,9 +39,17 @@
         "default": "world"
       },
       "zoom": {
-        "title": "Zoom",
+        "title": "Custom Zoom",
         "type": "integer",
         "default": 15
+      },
+      "lat": {
+        "title": "Custom Latitude",
+        "type": "number"
+      },
+      "lng": {
+        "title": "Custom Longitude",
+        "type": "number"
       }
     }
   }
