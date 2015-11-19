@@ -1,6 +1,6 @@
 (function(){
 
-  console.log('init');
+  var mapRegex = /mapjam.com\/([\w-]*)/i
 
   // We check for features which are not universally supported, and don't try to
   // show the app if it would error.
@@ -11,7 +11,6 @@
   options = INSTALL_OPTIONS;
 
   ready = function(fn) {
-    console.log("READY");
     if (document.readyState != 'loading'){
       fn();
     } else {
@@ -19,18 +18,26 @@
     }
   };
 
+  var map = options.map;
+  if(!map) {
+    console.log('No map specified, exiting');
+    return;
+  }
+
+  var matches = map.match(mapRegex);
+  if (matches) {
+    map = matches[1];
+  }
   ready(function(){
-    console.log("DFUNC");
     el = Eager.createElement(options.element);
     var params = {
       app_url: '//mapjam.com/',
       cdn_url: '//mapjamjson.global.ssl.fastly.net/',
-      map_id: options.map,
+      map_id: map,
       container: 'mapjam-1',
       domain: 'mapjam.com',
       disableClusteringAtZoom: 1
     };
-    console.log(options.advanced.zoom);
     if (options.advanced.zoom !== '-1') {
       params.zoom = options.advanced.zoom;
     }
@@ -48,7 +55,7 @@
       }
     }
     var qs = parts.join("&");
-    console.log('qs: ' + qs);
+    //console.log('qs: ' + qs);
     var style =  '<style>' +
         '.mapjam-holder {' +
         'position: relative;' +

@@ -12,7 +12,7 @@
     "properties": {
       "map": {
         "order": 1,
-        "title": "Enter the Map identifier from Mapjam",
+        "title": "Enter the Map ID - create your map at Mapjam",
         "type": "string",
         "default": "world"
       },
