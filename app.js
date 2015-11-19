@@ -18,15 +18,15 @@
     }
   };
 
-  var map = options.map || 'world';
+  var update = function(){
+    el = Eager.createElement(options.element, el);
 
-  var matches = map.match(mapRegex);
-  if (matches) {
-    map = matches[1];
-  }
+    var map = options.map || 'world';
 
-  ready(function(){
-    el = Eager.createElement(options.element);
+    var matches = map.match(mapRegex);
+    if (matches) {
+      map = matches[1];
+    }
 
     var params = {
       app_url: '//mapjam.com/',
@@ -54,25 +54,35 @@
     }
 
     var qs = parts.join("&");
-    var style =  '<style>' +
-        '.mapjam-holder {' +
-        'position: relative;' +
-        'width: 100%;' +
-        'padding-bottom: ' + options.aspectRatio + '%;' +
-        '}' +
-        '.mapjam-iframe {' +
-        'position: absolute;' +
-        'top: 0;' +
-        'height: 100%;' +
-        'left: 0;' +
-        'width: 100%;' +
-        '}' +
-        '</style>';
 
-    var ifr = '<iframe class="mapjam-iframe" frameborder="0" id="mapjam-iframe" src="//embeds.mapjam.com/v2/map-embed.html?' + qs + '" style="width:100%;height:100%;"></iframe>';
-    var holder = '<div class="mapjam-holder">' + style + ifr + '</div>';
+    var iframe = document.createElement('iframe');
+    iframe.setAttribute('frameborder', 0);
+    iframe.src = '//embeds.mapjam.com/v2/map-embed.html?' + qs;
 
-    el.innerHTML = holder;
-  });
+    iframe.style.position = 'absolute';
+    iframe.style.height = '100%';
+    iframe.style.width = '100%';
+    iframe.style.top = 0;
+    iframe.style.left = 0;
+
+    el.style.display = 'block';
+    el.style.position = 'relative';
+    el.style.width = '100%';
+    el.style.paddingBottom = options.aspectRatio + '%';
+
+    el.appendChild(iframe);
+  };
+
+  ready(update);
+
+  var setOptions = function(opts){
+    options = opts;
+
+    update();
+  };
+
+  window.EagerMapJam = {
+    setOptions: setOptions
+  }
 
 })();

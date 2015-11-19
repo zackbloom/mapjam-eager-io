@@ -8,6 +8,14 @@
       }
     ]
   },
+  "preview": {
+    "handlers": [
+      {
+        "options": ["*"],
+        "execute": "EagerMapJam.setOptions(INSTALL_OPTIONS)"
+      }
+    ]
+  },
   "options": {
     "properties": {
       "map": {
@@ -133,7 +141,8 @@
           "20": "5m (House)",
           "21": "2.5m"
         },
-        "format": "radios"
+        "format": "radios",
+        "default": "0"
       },
 
       "sharingVisible" : {
