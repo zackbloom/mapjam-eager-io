@@ -8,20 +8,18 @@
       }
     ]
   },
-  "preview": {
-    "handlers": [
-      {
-        "options": ["*"],
-        "execute": "MapjamWidget.setOptions(INSTALL_OPTIONS)"
-      }
-    ]
-  },
   "options": {
     "properties": {
+      "map": {
+        "order": 1,
+        "title": "Enter the Map identifier from Mapjam",
+        "type": "string",
+        "default": "world"
+      },
       "element": {
         "title": "Location",
         "description": "Where would you like the map to appear?",
-        "order": 1,
+        "order": 2,
         "type": "object",
         "format": "element",
         "default": {
@@ -29,23 +27,38 @@
           "method": "append"
         }
       },
-      "map": {
-        "title": "Map",
-        "type": "string",
-        "default": "world"
+      "showAdvanced": {
+        "order": 3,
+        "type": "boolean",
+        "title": "Show advanced options",
+        "default": false
       },
-      "zoom": {
-        "title": "Custom Zoom",
-        "type": "integer",
-        "default": 15
-      },
-      "lat": {
-        "title": "Custom Latitude",
-        "type": "number"
-      },
-      "lng": {
-        "title": "Custom Longitude",
-        "type": "number"
+      "advanced": {
+        "showIf": {
+          "showAdvanced": true
+        },
+        "order": 4,
+        "type": "object",
+        "title": "Advanced options",
+        "properties": {
+          "zoom": {
+            "title": "Custom Zoom",
+            "type": "integer",
+            "default": 15
+          },
+          "lat": {
+            "title": "Custom Latitude",
+            "type": "number"
+          },
+          "lng": {
+            "title": "Custom Longitude",
+            "type": "number"
+          },
+          "map_height": {
+            "title": "Height",
+            "type": "number"
+          }
+        }
       }
     }
   }
