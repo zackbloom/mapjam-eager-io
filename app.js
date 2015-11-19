@@ -30,17 +30,16 @@
       domain: 'mapjam.com',
       disableClusteringAtZoom: 1
     };
-    if (options.zoom) {
-      params.zoom = Math.max(Math.min(options.zoom, 18), 1);
+    console.log(options.advanced.zoom);
+    if (options.advanced.zoom !== '-1') {
+      params.zoom = options.advanced.zoom;
     }
-    if (options.sharing_visible) {
-      params.sharing_visible = !options.sharing_visible;
-    }
+    params.sharing_visible = options.advanced.sharing_visible;
     function validNum(val) {
       return val !== null && val !== undefined && !isNaN(val);
     }
-    if (validNum(options.lat) && validNum(options.lng)) {
-      params.map_lat_lng = options.lng + ',' + options.lat;
+    if (validNum(options.advanced.lat) && validNum(options.advanced.lng)) {
+      params.map_lat_lng = options.advanced.lng + ',' + options.advanced.lat;
     }
     var parts = [];
     for (var i in params) {
@@ -51,23 +50,22 @@
     var qs = parts.join("&");
     console.log('qs: ' + qs);
     var style =  '<style>' +
-        '.mapjam-iframe {' +
+        '.mapjam-holder {' +
         'position: relative;' +
         'width: 100%;' +
-        'height: 0;' +
-        'padding-bottom: 80%;' +
+        'padding-bottom: ' + options.aspectRatio + '%;' +
         '}' +
-        '.eager-google-map {' +
+        '.mapjam-iframe {' +
         'position: absolute;' +
         'top: 0;' +
         'height: 100%;' +
         'left: 0;' +
         'width: 100%;' +
-        'background: #e5e3df;' +
         '}' +
         '</style>';
-    var ifr = '<div><h1>TEST</h1><iframe class="mapjam-iframe" frameborder="0" id="mapjam-iframe" src="//embeds.mapjam.com/v2/map-embed.html?' + qs + '" style="width: 100%;height:100px;padding-bottom:' + 80 + '%"></iframe></div>';
-    el.innerHTML = ifr;
+    var ifr = '<iframe class="mapjam-iframe" frameborder="0" id="mapjam-iframe" src="//embeds.mapjam.com/v2/map-embed.html?' + qs + '" style="width:100%;height:100%;"></iframe>';
+    var thing = '<div class="mapjam-holder">' + style + ifr + '</div>';
+    el.innerHTML = thing;
   });
 
 })();

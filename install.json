@@ -19,7 +19,7 @@
       "element": {
         "title": "Location",
         "description": "Where would you like the map to appear?",
-        "order": 2,
+        "order": 3,
         "type": "object",
         "format": "element",
         "default": {
@@ -27,8 +27,25 @@
           "method": "append"
         }
       },
+      "aspectRatio": {
+        "order": 5,
+        "title": "Layout",
+        "type": "string",
+        "enum": [
+          "50",
+          "100",
+          "200"
+        ],
+        "enumNames": {
+          "50": "Horizontal",
+          "100": "Square",
+          "200": "Vertical"
+        },
+        "format": "radios",
+        "default": "50"
+      },
       "showAdvanced": {
-        "order": 3,
+        "order": 7,
         "type": "boolean",
         "title": "Show advanced options",
         "default": false
@@ -37,26 +54,81 @@
         "showIf": {
           "showAdvanced": true
         },
-        "order": 4,
+        "order": 9,
         "type": "object",
         "title": "Advanced options",
         "properties": {
-          "zoom": {
-            "title": "Custom Zoom",
-            "type": "integer",
-            "default": 15
-          },
           "lat": {
-            "title": "Custom Latitude",
+            "order": 11,
+            "title": "Custom Latitude - if you want your map centered in a specific location",
             "type": "number"
           },
           "lng": {
-            "title": "Custom Longitude",
+            "order": 13,
+            "title": "Custom Longitude - if you want your map centered in a specific location",
             "type": "number"
           },
-          "map_height": {
-            "title": "Height",
-            "type": "number"
+          "zoom": {
+            "order": 15,
+            "title": "Override Zoom or use Default value when map was created",
+            "type": "string",
+            "enum": [
+              "-1",
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16",
+              "17",
+              "18",
+              "19",
+              "20",
+              "21"
+            ],
+            "enumNames": {
+              "-1": "Default",
+              "0": "World",
+              "1": "4000km",
+              "2": "2000km",
+              "3": "1000km",
+              "4": "400km",
+              "5": "200km",
+              "6": "100km",
+              "7": "50km",
+              "8": "30km",
+              "9": "15km",
+              "10": "8km",
+              "11": "4km",
+              "12": "2km (City)",
+              "13": "1km",
+              "14": "400m (District)",
+              "15": "200m",
+              "16": "100m",
+              "17": "50m (Street)",
+              "18": "20m",
+              "19": "10m",
+              "20": "5m (House)",
+              "21": "2.5m"
+            },
+            "format": "radios",
+            "default": "-1"
+          },
+          "sharing_visible" : {
+            "order": 17,
+            "title":"Allow people to share this map",
+            "type":"boolean"
           }
         }
       }
