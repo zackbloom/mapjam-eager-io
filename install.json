@@ -12,13 +12,13 @@
     "properties": {
       "map": {
         "order": 1,
-        "title": "Enter the Map ID - create your map at Mapjam",
-        "type": "string",
-        "default": "world"
+        "title": "Your Map ID",
+        "description": "Create your map at <a href='http://mapjam.com' target='_blank'>MapJam.com</a>",
+        "type": "string"
       },
       "element": {
         "title": "Location",
-        "description": "Where would you like the map to appear?",
+        "description": "Where on the page would you like the map to appear?",
         "order": 3,
         "type": "object",
         "format": "element",
@@ -44,93 +44,104 @@
         "format": "radios",
         "default": "50"
       },
-      "showAdvanced": {
+
+      "showCustomLocation": {
         "order": 7,
         "type": "boolean",
-        "title": "Show advanced options",
+        "title": "Set a custom location",
+        "description": "Provide a custom location if you would like your map centered in a different location than what was chosen when creating the map.",
         "default": false
       },
-      "advanced": {
-        "showIf": {
-          "showAdvanced": true
-        },
+      "location": {
         "order": 9,
+        "title": "Custom Location",
         "type": "object",
-        "title": "Advanced options",
+        "showIf": "showCustomLocation",
         "properties": {
           "lat": {
-            "order": 11,
-            "title": "Custom Latitude - if you want your map centered in a specific location",
-            "type": "number"
+            "order": 1,
+            "title": "Latitude",
+            "type": "number",
+            "default": 51.44
           },
           "lng": {
-            "order": 13,
-            "title": "Custom Longitude - if you want your map centered in a specific location",
-            "type": "number"
-          },
-          "zoom": {
-            "order": 15,
-            "title": "Override Zoom or use Default value when map was created",
-            "type": "string",
-            "enum": [
-              "-1",
-              "0",
-              "1",
-              "2",
-              "3",
-              "4",
-              "5",
-              "6",
-              "7",
-              "8",
-              "9",
-              "10",
-              "11",
-              "12",
-              "13",
-              "14",
-              "15",
-              "16",
-              "17",
-              "18",
-              "19",
-              "20",
-              "21"
-            ],
-            "enumNames": {
-              "-1": "Default",
-              "0": "World",
-              "1": "4000km",
-              "2": "2000km",
-              "3": "1000km",
-              "4": "400km",
-              "5": "200km",
-              "6": "100km",
-              "7": "50km",
-              "8": "30km",
-              "9": "15km",
-              "10": "8km",
-              "11": "4km",
-              "12": "2km (City)",
-              "13": "1km",
-              "14": "400m (District)",
-              "15": "200m",
-              "16": "100m",
-              "17": "50m (Street)",
-              "18": "20m",
-              "19": "10m",
-              "20": "5m (House)",
-              "21": "2.5m"
-            },
-            "format": "radios",
-            "default": "-1"
-          },
-          "sharing_visible" : {
-            "order": 17,
-            "title":"Allow people to share this map",
-            "type":"boolean"
+            "order": 3,
+            "title": "Longitude",
+            "type": "number",
+            "default": 0
           }
         }
+      },
+
+     "showCustomZoom": {
+        "order": 11,
+        "type": "boolean",
+        "title": "Set a custom zoom level",
+        "description": "Provide a custom zoom level if you would like your map to have a different zoom level than what was chosen when creating the map.",
+        "default": false
+      },
+      "zoom": {
+        "order": 13,
+        "title": "Zoom",
+        "type": "string",
+        "showIf": "showCustomZoom",
+        "enum": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20",
+          "21"
+        ],
+        "enumNames": {
+          "0": "World",
+          "1": "4000km",
+          "2": "2000km",
+          "3": "1000km",
+          "4": "400km",
+          "5": "200km",
+          "6": "100km",
+          "7": "50km",
+          "8": "30km",
+          "9": "15km",
+          "10": "8km",
+          "11": "4km",
+          "12": "2km (City)",
+          "13": "1km",
+          "14": "400m (District)",
+          "15": "200m",
+          "16": "100m",
+          "17": "50m (Street)",
+          "18": "20m",
+          "19": "10m",
+          "20": "5m (House)",
+          "21": "2.5m"
+        },
+        "format": "radios"
+      },
+
+      "sharingVisible" : {
+        "order": 17,
+        "title": "Show sharing button",
+        "description": "Show a sharing button on the map to make it easier for your visitors to promote your map.",
+        "type": "boolean",
+        "default": true
       }
     }
   }
